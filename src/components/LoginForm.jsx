@@ -14,13 +14,21 @@ const LoginForm = () => {
       "User-Secret": password,
     };
 
-    // try {
-    //     axios.get("")
-    // } catch (error) {}
+    try {
+      // username | password => chatengine --> give messages
+      await axios.get("https://api.chatengine.io/chats", {
+        headers: authObject,
+      });
 
-    // username | password => chatengine --> give messages
-    // works out --> logged in
-    // error --> try with new credentials
+      // works out --> logged in
+
+      localStorage.setItem("username", username);
+      localStorage.setItem("password", password);
+
+      window.location.reload();
+    } catch (error) {
+      // error --> try with new credentials
+    }
   };
 
   return (
@@ -54,3 +62,4 @@ const LoginForm = () => {
     </div>
   );
 };
+export default LoginForm;
